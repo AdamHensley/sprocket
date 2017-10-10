@@ -2,7 +2,7 @@
  * Created by Adam Hensley on 10/10/2017.
  */
 function buy(data, cb) {
-    return fetch(`http://localhost:3001/buy`, {
+    return fetch('http://localhost:3001/buy', {
         method: "PUT",
         body: JSON.stringify(data),
         accept: 'application/json',
@@ -13,7 +13,7 @@ function buy(data, cb) {
 }
 
 function sell(data, cb) {
-    return fetch(`http://localhost:3001/sell`, {
+    return fetch('http://localhost:3001/sell', {
         method: "PUT",
         body: JSON.stringify(data),
         accept: 'application/json',
@@ -25,13 +25,9 @@ function sell(data, cb) {
 }
 
 function checkPrice(cb) {
-    var myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
-
-    return fetch(`http://localhost:3001/currentPrice`, {
-        method: "GET",
+    return fetch('http://localhost:3001/currentPrice', {
+        method: 'GET',
         accept: 'application/json',
-        headers: myHeaders
     })
         .then(checkStatus)
         .then(parseJSON)

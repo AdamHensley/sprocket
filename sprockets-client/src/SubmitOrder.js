@@ -15,10 +15,17 @@ class SubmitOrder extends React.Component {
             sprockets: 0,
             action: "Select Action",
             count: 0,
-            currentPrice: 2,
+            currentPrice: 0,
             amount: 0,
             total: 0
-        }
+        };
+
+        setInterval(function() {
+            var self = this;
+            Client.checkPrice(function(data) {
+                self.setState({currentPrice : data.currentPrice});
+            });
+        }.bind(this), 3000);
     }
 
     handleSubmit = e => {
@@ -42,7 +49,6 @@ class SubmitOrder extends React.Component {
     };
 
     setAction (eventKey, event) {
-        console.log("asdfsdf" + eventKey, event);
         var actionEvent = "";
         if(eventKey === "1") {
             actionEvent = "Buy";
@@ -69,9 +75,7 @@ class SubmitOrder extends React.Component {
                     <div className="col-xs-5"/>
                     <div className="col-xs-2">Current Price: ${this.state.currentPrice}</div>
                     <div className="col-xs-5"/>
-
                 </div>
-
 
                 <div className="row" style={{padding:10}}>
                     <div className="col-xs-4"/>
@@ -105,7 +109,10 @@ class SubmitOrder extends React.Component {
 
     sum(count) {
         return (this.state.currentPrice * count).toFixed(2);
-    }
+}
+
+
+
 }
 
 

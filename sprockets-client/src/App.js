@@ -8,8 +8,8 @@ import Client from "./Client";
 
 class App extends Component {
     state = {
-        availableCash: 200,
-        sprockets: 5,
+        availableCash: 100,
+        sprockets: 0,
         currentPrice: 27.50,
         history: [{
             date: "3/13",
@@ -22,12 +22,6 @@ class App extends Component {
         cash: 0,
     };
 
-    submitOrder = itemIndex => {
-        const filteredFoods = this.state.selectedFoods.filter(
-            (item, idx) => itemIndex !== idx
-        );
-        this.setState({ selectedFoods: filteredFoods });
-    };
 
   render() {
     const { availableCash, sprockets, history, action, amount, cash, currentPrice} = this.state;
@@ -51,8 +45,9 @@ class App extends Component {
 
 function init() {
     setTimeout(function() {
-        var data = Client.checkPrice();
-        App.currentPrice = data.currentPrice;
+        var data = Client.checkPrice(function(data) {
+            App.currentPrice = data.currentPrice;
+        });
     }, 3000);
 }
 

@@ -24,6 +24,7 @@ router.get('/currentPrice', function(req, res, next) {
     }
     res.setHeader('Content-Type', 'application/json');
     var body = { currentPrice: sprocket.currentPrice };
+    res.body = body;
     res.send(JSON.stringify(body));
 });
 
