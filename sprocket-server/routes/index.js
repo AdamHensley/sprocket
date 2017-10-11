@@ -14,7 +14,7 @@ var sprocket = {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Sprocket-Server' });
 });
 
 router.get('/currentPrice', function(req, res, next) {

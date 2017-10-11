@@ -3,12 +3,32 @@
  */
 import React from "react";
 
-export default function Holdings(props) {
-    const { availableCash, sprockets } = props;
+class Holdings extends React.Component {
+    constructor(props) {
+        super(props);
 
-    return (
-        <div>
-            <span>Available Cash: {availableCash} Sprockets: {sprockets}</span>
-        </div>
-    );
+        this.state = {
+            cash: 100,
+            sprockets: 0
+        };
+
+    }
+
+    render() {
+        const { cash, sprockets } = this.state;
+
+        return (
+            <div>
+                <span>Available Cash: ${this.props.cash} Sprockets: {this.props.sprockets}</span>
+            </div>
+        );
+    }
+
 }
+// Holdings.propTypes = {
+//     cash: React.PropTypes.,
+//     sprockets: React.PropTypes.any,
+// };
+
+
+export default Holdings;

@@ -28,24 +28,34 @@ class SubmitOrder extends React.Component {
         }.bind(this), 3000);
     }
 
-    handleSubmit = e => {
-        const value = e.target.value;
+    handleSubmit = () => {
 
-        if (this.state.action === "Buy") {
-            Client.buy({count: this.state.count, price: this.state.price},
-                response => this.setState({
-                    history: response.history,
-                    cash: response.cash,
-                    sprockets: response.sprockets
-            }));
-        } else {
-            Client.sell({count: this.state.count, price: this.state.price},
-                response => this.setState({
-                    history: response.history,
-                    cash: response.cash,
-                    sprockets: response.sprockets
-                }));
+        var self = this;
+        try{
+            if (this.state.action === "Buy") {
+                Client.buy({sprockets: this.state.amount, unit_price: this.state.currentPrice},
+                    response => self.setState({
+                        history: response.history,
+                        cash: response.cash,
+                        sprockets: response.sprockets
+                    }));
+            } else {
+                Client.sell({sprockets: this.state.amount, unit_price: this.state.currentPrice},
+                    response => self.setState({
+                        history: response.history,
+                        cash: response.cash,
+                        sprockets: response.sprockets
+                    }));
+            }
+        } finally {
+            this.props.sendData(this.state.history, this.state.cash, this.state.amount);
         }
+
+
+
+
+
+
     };
 
     setAction (eventKey, event) {
@@ -102,19 +112,16 @@ class SubmitOrder extends React.Component {
                     <div className="col-xs-2">Total</div>
                     <div className="col-xs-2">{this.sum(this.state.amount)}</div>
                 </div>
-                <button type="button" className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
+                <button type="button" className="btn btn-primary" onClick={this.handleSubmit.bind(this)}>Submit</button>
+
             </div>
         );
     }
 
     sum(count) {
         return (this.state.currentPrice * count).toFixed(2);
+    }
 }
-
-
-
-}
-
 
 
 export default SubmitOrder;

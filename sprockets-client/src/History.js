@@ -6,13 +6,13 @@ import React from "react";
 export  default function History(props) {
     const { history } = props;
 
-    const historyRows = history.map((history, idx) => (
+    const historyRows = history.map((hist, idx) => (
         <tr key={idx} >
-            <td className="right aligned">{history.date}</td>
-            <td className="right aligned">{history.action}</td>
-            <td className="right aligned">{history.unit_price}</td>
-            <td className="right aligned">{history.count}</td>
-            <td className="right aligned">{total(history.unit_price, history.count)}</td>
+            <td className="right aligned">{hist.date}</td>
+            <td className="right aligned">{hist.action}</td>
+            <td className="right aligned">{hist.unit_price}</td>
+            <td className="right aligned">{hist.sprockets}</td>
+            <td className="right aligned">{total(hist.unit_price, hist.sprockets)}</td>
         </tr>
     ));
 

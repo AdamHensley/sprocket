@@ -2,8 +2,11 @@
  * Created by Adam Hensley on 10/10/2017.
  */
 function buy(data, cb) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
     return fetch('http://localhost:3001/buy', {
         method: "PUT",
+        headers: myHeaders,
         body: JSON.stringify(data),
         accept: 'application/json',
     })
@@ -13,8 +16,11 @@ function buy(data, cb) {
 }
 
 function sell(data, cb) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
     return fetch('http://localhost:3001/sell', {
         method: "PUT",
+        headers: myHeaders,
         body: JSON.stringify(data),
         accept: 'application/json',
 
