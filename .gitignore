@@ -1,2 +1,4 @@
 sprockets-client/node_modules
 sprocket-server/node_modules
+sprockets-client/.idea/*
+sprocket-server/.idea/*
