@@ -13,8 +13,10 @@ var sprocket = {
 };
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Sprocket-Server' });
+router.get('/', function (req, res) {
+    res.status(200);
+    res.setHeader('Content-Type', 'application/json');
+    res.json({status:'ok'}).send();
 });
 
 router.get('/currentPrice', function(req, res, next) {
