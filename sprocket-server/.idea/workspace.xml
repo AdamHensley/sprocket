@@ -5,6 +5,9 @@
       <run-configuration type="mocha-javascript-test-runner" name="Array" />
     </enabled-run-configurations>
   </component>
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/../README.md" line="4" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="79aa02bc-497f-4dde-8417-8e6b6c6b7274" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -22,11 +25,21 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="test.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="test.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/test/test.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="770">
-                  <caret line="109" column="7" lean-forward="true" selection-start-line="109" selection-start-column="7" selection-end-line="109" selection-end-column="7" />
+                <state relative-caret-position="430">
+                  <caret line="107" column="23" lean-forward="true" selection-start-line="107" selection-start-column="23" selection-end-line="107" selection-end-column="23" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/../README.md">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="136">
+                  <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -69,7 +82,7 @@
           <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/routes/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="345">
+                <state relative-caret-position="675">
                   <caret line="96" column="20" lean-forward="false" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
                   <folding />
                 </state>
@@ -99,6 +112,7 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/test/test.js" />
+        <option value="$PROJECT_DIR$/../README.md" />
       </list>
     </option>
   </component>
@@ -222,7 +236,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="6.9.1" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sprockets-client" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../README.md" />
     <property name="nodejs.mocha.mocha_node_package_dir" value="C:\git\Sprocket\sprocket-server\node_modules\mocha" />
   </component>
   <component name="RunDashboard">
@@ -409,7 +423,7 @@
       <workItem from="1507658065298" duration="1891000" />
       <workItem from="1507659976976" duration="7552000" />
       <workItem from="1507743843454" duration="1913000" />
-      <workItem from="1507775002361" duration="7731000" />
+      <workItem from="1507775002361" duration="7852000" />
     </task>
     <servers />
   </component>
@@ -446,7 +460,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29098000" />
+    <option name="totallyTimeSpent" value="29219000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="238" y="132" width="1850" height="1098" extended-state="0" />
@@ -667,7 +681,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
+        <state relative-caret-position="675">
           <caret line="96" column="20" lean-forward="false" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
           <folding />
         </state>
@@ -675,8 +689,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="109" column="7" lean-forward="true" selection-start-line="109" selection-start-column="7" selection-end-line="109" selection-end-column="7" />
+        <state relative-caret-position="430">
+          <caret line="107" column="23" lean-forward="true" selection-start-line="107" selection-start-column="23" selection-end-line="107" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
