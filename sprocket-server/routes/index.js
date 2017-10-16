@@ -24,8 +24,14 @@ router.get('/currentPrice', function(req, res, next) {
     if(!currencyTimer) {
         currencyTimer = setCurrentPrice();
     }
+    var date = new Date();
     res.setHeader('Content-Type', 'application/json');
-    var body = { currentPrice: sprocket.currentPrice };
+    var ampm = date.getHours() >= 12 ? 'pm': 'am';
+
+    var body = {
+        currentPrice: sprocket.currentPrice,
+        time: date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " " + ampm
+        };
     res.body = body;
     res.send(JSON.stringify(body));
 });

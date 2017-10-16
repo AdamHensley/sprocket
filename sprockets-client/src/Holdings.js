@@ -11,7 +11,8 @@ class Holdings extends React.Component {
     render() {
         return (
             <div>
-                <span>Available Cash: ${this.props.cash} Sprockets: {this.props.availableSprockets}</span>
+                <p>Available Cash: ${this.props.cash}</p>
+                <p> Sprockets: {this.props.availableSprockets}</p>
             </div>
         );
     }

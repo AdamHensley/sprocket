@@ -17,12 +17,12 @@ export  default function History(props) {
     ));
 
     return (
-        <div className="col-s-6 col-sm-offset-5">
+        <div>
             <table style={{ maxWidth: 500 }} className="ui selectable structured large table">
                 <thead>
                 <tr>
                 </tr>
-                <tr>
+                <tr style={{backgroundColor:'#bcbcbc'}}>
                     <th>Date</th>
                     <th>Action</th>
                     <th>Unit Price</th>
@@ -30,7 +30,7 @@ export  default function History(props) {
                     <th>Total</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody style={{backgroundColor:'#e5e5e5'}}>
                 {historyRows}
                 </tbody>
             </table>

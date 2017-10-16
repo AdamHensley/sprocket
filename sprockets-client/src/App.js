@@ -33,14 +33,17 @@ class App extends Component {
 
     return (
       <div className="App">
-
-          <h1>Sprocket Exchange</h1>
-          <h2> Holdings </h2>
-          <Holdings cash={cash} availableSprockets={availableSprockets}/>
-          <h2> Place Order </h2>
-          <SubmitOrder sendData={this.addData.bind(this)} action={action} amount={amount} history={history} cash={cash} sprockets={sprockets} currentPrice={currentPrice}/>
-          <h2> History </h2>
-          <History history={history}/>
+        <div className="col-xs-4"/>
+          <div className="col-xs-4" style={{textAlign:'left'}}>
+              <h1>Sprocket Exchange</h1>
+              <h2>Your Holdings</h2>
+              <Holdings cash={cash} availableSprockets={availableSprockets}/>
+              <h2>Place Order</h2>
+              <SubmitOrder sendData={this.addData.bind(this)} action={action} amount={amount} history={history} cash={cash} sprockets={sprockets} currentPrice={currentPrice}/>
+              <h2>History</h2>
+              <History history={history}/>
+          </div>
+          <div className="col-xs-4"/>
       </div>
     );
   }

@@ -19,13 +19,17 @@ class SubmitOrder extends React.Component {
             currentPrice: 0,
             amount: 0,
             total: 0,
-            selected_price: null
+            selected_price: null,
+            time: ""
         };
 
         setInterval(function() {
             var self = this;
             Client.checkPrice(function(data) {
-                self.setState({currentPrice : data.currentPrice});
+                self.setState({
+                    currentPrice : data.currentPrice,
+                    time: data.time
+                                });
             });
         }.bind(this), 3000);
     }
@@ -96,17 +100,17 @@ class SubmitOrder extends React.Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-xs-5"/>
-                    <div className="col-xs-2">Current Price: ${this.state.currentPrice}</div>
-                    <div className="col-xs-5"/>
-                </div>
-                <div className="row">
-                    <div className="col-xs-5"/>
-                    <div className="col-xs-2">Captured Price: ${this.state.selected_price || "No price captured."}</div>
-                    <div className="col-xs-5"/>
-                </div>
 
-                <div style={{backgroundColor:'#b7b7b7', borderStyle:'solid', maxWidth:'300px', marginLeft:'400px' }}>
+                    <div className="col-xs-3" style={{textAlign:'left'}}>Current Price: ${this.state.currentPrice} <em>(as of {this.state.time})</em></div>
+                    <div className="col-xs-5"/>
+                </div>
+                {/*<div className="row">*/}
+                    {/*<div className="col-xs-5"/>*/}
+                    {/*<div className="col-xs-2">Captured Price: ${this.state.selected_price || "No price captured."}</div>*/}
+                    {/*<div className="col-xs-5"/>*/}
+                {/*</div>*/}
+
+                <div style={{backgroundColor:'#e5e5e5', borderStyle:'solid', maxWidth:'300px' }}>
                     <form >
                         <div className="row" style={{padding:10}}>
 
