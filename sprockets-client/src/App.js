@@ -4,7 +4,6 @@ import './App.css';
 import Holdings from "./Holdings";
 import History from "./History";
 import SubmitOrder from "./SubmitOrder";
-import Client from "./Client";
 
 class App extends Component {
     constructor() {
@@ -17,7 +16,7 @@ class App extends Component {
             history: [],
             action: "",
             amount: 0,
-            cash: 0,
+            cash: 100,
         };
     }
 
@@ -34,10 +33,8 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
+
+          <h1>Sprocket Exchange</h1>
           <h2> Holdings </h2>
           <Holdings cash={cash} availableSprockets={availableSprockets}/>
           <h2> Place Order </h2>

@@ -4,7 +4,6 @@
 import React from "react";
 import Client from "./Client";
 import { DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap';
-var async = require('async');
 
 class SubmitOrder extends React.Component {
     constructor(props) {
@@ -107,35 +106,37 @@ class SubmitOrder extends React.Component {
                     <div className="col-xs-5"/>
                 </div>
 
-                <form>
-                    <div className="row" style={{padding:10}}>
-                        <div className="col-xs-4"/>
-                        <div className="col-xs-2">Action</div>
-                        <div className="col-xs-2">
-                            <DropdownButton title={this.state.action} id="dropdown-size-medium" onSelect={this.setAction.bind(this)} onChange={this.handleInputChange} value={this.state.action}>
-                                <MenuItem eventKey="1" value="Buy">Buy</MenuItem>
-                                <MenuItem eventKey="2" value="Sell">Sell</MenuItem>
-                            </DropdownButton>
-                        </div>
-                        <div className="col-xs-4"/>
-                    </div>
+                <div style={{backgroundColor:'#b7b7b7', borderStyle:'solid', maxWidth:'300px', marginLeft:'400px' }}>
+                    <form >
+                        <div className="row" style={{padding:10}}>
 
-                    <div className="row">
-                        <div className="col-xs-4"/>
-                        <div className="col-xs-2">Amount</div>
-                        <div className="col-xs-2">
-                            <input type="number" value={this.state.amount} onChange={this.setAmount.bind(this)}  placeholder="0" />
+                            <div className="col-xs-2">Action</div>
+                            <div className="col-xs-2">
+                                <DropdownButton title={this.state.action} id="dropdown-size-medium" onSelect={this.setAction.bind(this)} onChange={this.handleInputChange} value={this.state.action}>
+                                    <MenuItem eventKey="1" value="Buy">Buy</MenuItem>
+                                    <MenuItem eventKey="2" value="Sell">Sell</MenuItem>
+                                </DropdownButton>
+                            </div>
+                            <div className="col-xs-4"/>
                         </div>
-                        <div className="col-xs-2"/>
-                    </div>
-                    <div className="row" style={{padding:10}}>
-                        <div className="col-xs-4"/>
-                        <div className="col-xs-2">Total</div>
-                        <div className="col-xs-2">{this.sum(this.state.amount)}</div>
-                    </div>
-                    <button type="button" className="btn btn-primary" onClick={this.handleSubmit.bind(this)}>Submit</button>
 
-                </form>
+                        <div className="row">
+
+                            <div className="col-xs-2">Amount</div>
+                            <div className="col-xs-2">
+                                <input type="number" min="0" value={this.state.amount} onChange={this.setAmount.bind(this)}  placeholder="0" />
+                            </div>
+                            <div className="col-xs-2"/>
+                        </div>
+                        <div className="row" style={{padding:10}}>
+
+                            <div className="col-xs-2">Total</div>
+                            <div className="col-xs-2">${this.sum(this.state.amount)}</div>
+                        </div>
+                        <button type="button" className="btn btn-primary" onClick={this.handleSubmit.bind(this)}>Submit</button>
+
+                    </form>
+                </div>
             </div>
         );
     }
