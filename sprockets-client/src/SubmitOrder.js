@@ -43,17 +43,26 @@ class SubmitOrder extends React.Component {
                 if (self.state.action === "Buy") {
                     Client.buy({sprockets: self.state.amount, unit_price: self.state.selected_price},
                         function (response) {
-                            self.setState({
-                                history: response.history,
-                                cash: response.cash,
-                                availableSprockets: response.sprockets,
-                                selected_price: null
-                            });
-                            self.props.sendData(self.state.history, self.state.cash, self.state.availableSprockets)
+                            if(response.error) {
+                                alert("ERROR: " + response.error);
+                            }
+                            else {
+                                self.setState({
+                                    history: response.history,
+                                    cash: response.cash,
+                                    availableSprockets: response.sprockets,
+                                    selected_price: null
+                                });
+                                self.props.sendData(self.state.history, self.state.cash, self.state.availableSprockets)
+                            }
                         });
                 } else {
                     Client.sell({sprockets: self.state.amount, unit_price: self.state.selected_price},
                         function (response) {
+                        if(response.error) {
+                            alert("ERROR: " + response.error);
+                        }
+                        else {
                             self.setState({
                                 history: response.history,
                                 cash: response.cash,
@@ -61,6 +70,7 @@ class SubmitOrder extends React.Component {
                                 selected_price: null
                             });
                             self.props.sendData(self.state.history, self.state.cash, self.state.availableSprockets);
+                        }
                         });
                     }
         } finally {
@@ -100,8 +110,7 @@ class SubmitOrder extends React.Component {
         return (
             <div className="container">
                 <div className="row">
-
-                    <div className="col-xs-3" style={{textAlign:'left'}}>Current Price: ${this.state.currentPrice} <em>(as of {this.state.time})</em></div>
+                    <div className="col-xs-3" style={{textAlign:'left'}}>Current Price: ${this.state.currentPrice || "***Please Wait For Price..."} <em>(as of {this.state.time})</em></div>
                     <div className="col-xs-5"/>
                 </div>
                 {/*<div className="row">*/}
