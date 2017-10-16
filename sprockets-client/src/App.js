@@ -11,8 +11,9 @@ class App extends Component {
         super();
         this.state = {
             availableCash: 100,
+            availableSprockets: 0,
             sprockets: 0,
-            currentPrice: 0,
+            currentPrice: 22,
             history: [],
             action: "",
             amount: 0,
@@ -20,16 +21,16 @@ class App extends Component {
         };
     }
 
-    addData = (history, cash, sprockets) => {
+    addData = (history, cash, availableSprockets) => {
         this.setState({
             history: history,
             cash: cash,
-            sprockets: sprockets
+            availableSprockets: availableSprockets
         });
     };
 
   render() {
-    const { sprockets, history, action, amount, cash, currentPrice} = this.state;
+    const { sprockets, history, action, amount, cash, currentPrice, availableSprockets} = this.state;
 
     return (
       <div className="App">
@@ -38,7 +39,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
           <h2> Holdings </h2>
-          <Holdings cash={cash} sprockets={sprockets}/>
+          <Holdings cash={cash} availableSprockets={availableSprockets}/>
           <h2> Place Order </h2>
           <SubmitOrder sendData={this.addData.bind(this)} action={action} amount={amount} history={history} cash={cash} sprockets={sprockets} currentPrice={currentPrice}/>
           <h2> History </h2>

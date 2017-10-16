@@ -4,6 +4,7 @@
 import React from "react";
 import Client from "./Client";
 import { DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap';
+var async = require('async');
 
 class SubmitOrder extends React.Component {
     constructor(props) {
@@ -11,13 +12,15 @@ class SubmitOrder extends React.Component {
 
         this.state = {
             history: [],
-            cash: 0,
+            cash: 100,
             sprockets: 0,
+            availableSprockets: 0,
             action: "Select Action",
             count: 0,
             currentPrice: 0,
             amount: 0,
-            total: 0
+            total: 0,
+            selected_price: null
         };
 
         setInterval(function() {
@@ -30,32 +33,36 @@ class SubmitOrder extends React.Component {
 
     handleSubmit = () => {
 
+
         var self = this;
-        try{
-            if (this.state.action === "Buy") {
-                Client.buy({sprockets: this.state.amount, unit_price: this.state.currentPrice},
-                    response => self.setState({
-                        history: response.history,
-                        cash: response.cash,
-                        sprockets: response.sprockets
-                    }));
-            } else {
-                Client.sell({sprockets: this.state.amount, unit_price: this.state.currentPrice},
-                    response => self.setState({
-                        history: response.history,
-                        cash: response.cash,
-                        sprockets: response.sprockets
-                    }));
-            }
+
+        try {
+                if (self.state.action === "Buy") {
+                    Client.buy({sprockets: self.state.amount, unit_price: self.state.selected_price},
+                        function (response) {
+                            self.setState({
+                                history: response.history,
+                                cash: response.cash,
+                                availableSprockets: response.sprockets,
+                                selected_price: null
+                            });
+                            self.props.sendData(self.state.history, self.state.cash, self.state.availableSprockets)
+                        });
+                } else {
+                    Client.sell({sprockets: self.state.amount, unit_price: self.state.selected_price},
+                        function (response) {
+                            self.setState({
+                                history: response.history,
+                                cash: response.cash,
+                                availableSprockets: response.sprockets,
+                                selected_price: null
+                            });
+                            self.props.sendData(self.state.history, self.state.cash, self.state.availableSprockets);
+                        });
+                    }
         } finally {
-            this.props.sendData(this.state.history, this.state.cash, this.state.amount);
+
         }
-
-
-
-
-
-
     };
 
     setAction (eventKey, event) {
@@ -66,6 +73,9 @@ class SubmitOrder extends React.Component {
             actionEvent = "Sell";
         }
 
+        if(this.state.selected_price === null)
+            this.setState({selected_price: this.state.currentPrice});
+
         this.setState({
             action: actionEvent
         });
@@ -75,8 +85,13 @@ class SubmitOrder extends React.Component {
         this.setState({
             amount: event.target.value
         });
+        this.handleInputChange();
     }
 
+    handleInputChange() {
+        if(this.state.selected_price === null)
+            this.setState({selected_price: this.state.currentPrice});
+    }
 
     render() {
         return (
@@ -86,40 +101,47 @@ class SubmitOrder extends React.Component {
                     <div className="col-xs-2">Current Price: ${this.state.currentPrice}</div>
                     <div className="col-xs-5"/>
                 </div>
-
-                <div className="row" style={{padding:10}}>
-                    <div className="col-xs-4"/>
-                    <div className="col-xs-2">Action</div>
-                    <div className="col-xs-2">
-                        <DropdownButton title={this.state.action} id="dropdown-size-medium" onSelect={this.setAction.bind(this)} value={this.state.action}>
-                            <MenuItem eventKey="1" value="Buy">Buy</MenuItem>
-                            <MenuItem eventKey="2" value="Sell">Sell</MenuItem>
-                        </DropdownButton>
-                    </div>
-                    <div className="col-xs-4"/>
-                </div>
-
                 <div className="row">
-                    <div className="col-xs-4"/>
-                    <div className="col-xs-2">Amount</div>
-                    <div className="col-xs-2">
-                        <input type="number" value={this.state.amount} onChange={this.setAmount.bind(this)}  placeholder="0" />
-                    </div>
-                    <div className="col-xs-2"/>
+                    <div className="col-xs-5"/>
+                    <div className="col-xs-2">Captured Price: ${this.state.selected_price || "No price captured."}</div>
+                    <div className="col-xs-5"/>
                 </div>
-                <div className="row" style={{padding:10}}>
-                    <div className="col-xs-4"/>
-                    <div className="col-xs-2">Total</div>
-                    <div className="col-xs-2">{this.sum(this.state.amount)}</div>
-                </div>
-                <button type="button" className="btn btn-primary" onClick={this.handleSubmit.bind(this)}>Submit</button>
 
+                <form>
+                    <div className="row" style={{padding:10}}>
+                        <div className="col-xs-4"/>
+                        <div className="col-xs-2">Action</div>
+                        <div className="col-xs-2">
+                            <DropdownButton title={this.state.action} id="dropdown-size-medium" onSelect={this.setAction.bind(this)} onChange={this.handleInputChange} value={this.state.action}>
+                                <MenuItem eventKey="1" value="Buy">Buy</MenuItem>
+                                <MenuItem eventKey="2" value="Sell">Sell</MenuItem>
+                            </DropdownButton>
+                        </div>
+                        <div className="col-xs-4"/>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-xs-4"/>
+                        <div className="col-xs-2">Amount</div>
+                        <div className="col-xs-2">
+                            <input type="number" value={this.state.amount} onChange={this.setAmount.bind(this)}  placeholder="0" />
+                        </div>
+                        <div className="col-xs-2"/>
+                    </div>
+                    <div className="row" style={{padding:10}}>
+                        <div className="col-xs-4"/>
+                        <div className="col-xs-2">Total</div>
+                        <div className="col-xs-2">{this.sum(this.state.amount)}</div>
+                    </div>
+                    <button type="button" className="btn btn-primary" onClick={this.handleSubmit.bind(this)}>Submit</button>
+
+                </form>
             </div>
         );
     }
 
     sum(count) {
-        return (this.state.currentPrice * count).toFixed(2);
+        return (this.state.selected_price * count).toFixed(2);
     }
 }
 

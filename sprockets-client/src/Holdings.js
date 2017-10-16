@@ -15,11 +15,11 @@ class Holdings extends React.Component {
     }
 
     render() {
-        const { cash, sprockets } = this.state;
+        const { cash, availableSprockets } = this.state;
 
         return (
             <div>
-                <span>Available Cash: ${this.props.cash} Sprockets: {this.props.sprockets}</span>
+                <span>Available Cash: ${this.props.cash} Sprockets: {this.props.availableSprockets}</span>
             </div>
         );
     }

@@ -42,22 +42,20 @@ router.put('/buy',function (req, res) {
         res.send({error: "You do not have enough money!!"});
 
     } else {
-        (function (x) {
-            user.sprockets += Number(x);
-        }(data.sprockets));
 
+        user.sprockets += Number(data.sprockets);
         user.cash -= (data.unit_price * data.sprockets);
 
+        var date = new Date();
         var historyItem = {
-            date: new Date(),
+            date: date.getMonth() +1 +"/" + date.getDate(),
             unit_price: data.unit_price,
             sprockets: data.sprockets,
             action: "Buy"
         };
 
         user.history.push(historyItem);
-        var body = user;
-        res.send(JSON.stringify(body));
+        res.send(JSON.stringify(user));
     }
 });
 
@@ -75,14 +73,12 @@ router.put('/sell',function (req, res) {
 
     } else {
 
-        (function (x) {
-            user.sprockets -= Number(x);
-        }(data.sprockets));
-
+        user.sprockets -= Number(data.sprockets);
         user.cash += (Number(data.unit_price) * Number(data.sprockets));
 
+        var date = new Date();
         var historyItem = {
-            date: new Date(),
+            date: date.getMonth() +1 +"/" + date.getDate(),
             unit_price: data.unit_price,
             sprockets: data.sprockets,
             action: "Sell"
